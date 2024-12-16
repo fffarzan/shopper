@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checking out
+          uses: actions/checkout@v2
+        - name: Building docker image
+          run: docker compose build
+    
+    deploy:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checking out
+          uses: actions/checkout@v2
+        - name: Setting up Kubectl
+          uses: azure/k8s-set-context@v1
+        - name: Deploying
+          run: |
+            kubectl apply -f kubernetes/deployment.yaml
