@@ -1,1 +1,1 @@
-echo "npx --no -- commitlint --edit \$11"
+echo "npx --no -- commitlint --edit \$1"
