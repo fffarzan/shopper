@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { getProductDetails as _getProductDetails } from '../services/endpoints';
 import type { ProductType } from '@/models/models';
@@ -12,7 +11,7 @@ const { addProductId } = useSelectedProductIdsData();
 
 async function getProductDetails() {
 	const { data } = await _getProductDetails<ProductType>(route.params.id as string);
-	return data
+	return data;
 }
 
 const productDetails = useAsyncData(getProductDetails);

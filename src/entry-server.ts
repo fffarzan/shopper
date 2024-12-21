@@ -8,7 +8,6 @@ export async function render(url: string, manifest) {
 	await router.push(url);
 	await router.isReady();
 	const html = await renderToString(app, ctx);
-	console.log('ssrContext', ssrContext.toJS())
 	const preloadLinks = renderPreloadLinks(ctx.modules, manifest);
 	return [html, preloadLinks, ssrContext.toJS()];
 }
