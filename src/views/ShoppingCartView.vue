@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import Product from '../components/ProductBox.vue';
-import type { ProductType } from '@/models/models';
+import type { ProductType, SelectedProductType } from '@/models/models';
 import { getProductDetails as _getProductDetails } from '../services/endpoints';
 import type { AxiosResponse } from 'axios';
 import useSelectedProductIdsData from '@/composables/useSelectedProductIdsData';
-
-export type SelectedProductType = ProductType & { shoppingCartId: number };
 
 const { selectedProductIds, removeProductId } = useSelectedProductIdsData();
 
@@ -32,9 +30,7 @@ function removeProduct(e: Event, id: string, shoppingCartId: number) {
 	removeFromSelectedProducts(id, shoppingCartId);
 }
 
-onMounted(() => {
-	getSelectedProducts();
-});
+onMounted(getSelectedProducts);
 </script>
 
 <template>

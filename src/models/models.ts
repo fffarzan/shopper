@@ -5,3 +5,5 @@ export type ProductType = {
 	price: number;
 	title: string;
 };
+
+export type SelectedProductType = ProductType & { shoppingCartId: number };

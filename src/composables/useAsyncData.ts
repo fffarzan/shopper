@@ -14,11 +14,13 @@ export default function useAsyncData<T>(fn: () => Promise<T>) {
 		ctx[route.fullPath] = res;
 		data.value = res;
 	});
+	
 	onMounted(async () => {
 		if (!import.meta.env.SSR && !data.value) {
 			const res = await fn();
 			data.value = res;
 		}
 	});
+
 	return data;
 }

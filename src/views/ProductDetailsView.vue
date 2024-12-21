@@ -1,16 +1,25 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { getProductDetails as _getProductDetails } from '../services/endpoints';
+import { getProductDetails as _getProductDetails } from '@/services/endpoints';
 import type { ProductType } from '@/models/models';
-import AddToCartButton from '../components/Base/AddToCartButton.vue';
+import AddToCartButton from '@/components/Base/AddToCartButton.vue';
 import useAsyncData from '@/composables/useAsyncData';
 import useSelectedProductIdsData from '@/composables/useSelectedProductIdsData';
+import ResponseStatuses from '@/constants/responseStatuses';
 
 const route = useRoute();
 const { addProductId } = useSelectedProductIdsData();
 
+const isError = ref(false);
+
 async function getProductDetails() {
-	const { data } = await _getProductDetails<ProductType>(route.params.id as string);
+	isError.value = false;
+	const { data, status } = await _getProductDetails<ProductType>(route.params.id as string);
+	if (status !== ResponseStatuses.OK) {
+		isError.value = true;
+		return;
+	}
 	return data;
 }
 
@@ -19,7 +28,8 @@ const productDetails = useAsyncData(getProductDetails);
 
 <template>
 	<div>
-		<div v-if="productDetails && Object.keys(productDetails).length">
+		<p v-if="isError">Not such this product!</p>
+		<div v-else>
 			<br />
 			<img
 				:src="productDetails?.imgUrl"
@@ -33,9 +43,6 @@ const productDetails = useAsyncData(getProductDetails);
 				<strong>Price: {{ productDetails?.price }}$</strong>
 			</div>
 			<AddToCartButton @add-to-cart="addProductId(productDetails?.id)" />
-		</div>
-		<div v-else>
-			<p>Not such this product!</p>
 		</div>
 	</div>
 </template>
