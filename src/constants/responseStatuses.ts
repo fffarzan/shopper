@@ -1,5 +1,5 @@
 enum ResponseStatuses {
-	'OK' = 200
+	'OK' = 200,
 }
 
 export default ResponseStatuses;

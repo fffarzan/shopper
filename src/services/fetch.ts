@@ -1,8 +1,8 @@
-import axios, { type AxiosResponse } from 'axios';
+import axios from 'axios';
 
 export type Response<T> = {
-	data: T | null,
-	status: number,
+	data: T | null;
+	status: number;
 };
 
 export async function fetchData<T>(url: string, id?: string): Promise<Response<T>> {
