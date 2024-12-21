@@ -1,39 +1,32 @@
 import { fileURLToPath, URL } from 'node:url';
-
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-// import vueDevTools from 'vite-plugin-vue-devtools';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// https://vite.dev/config/
 export default defineConfig({
 	plugins: [
 		vue(),
-		// vueDevTools(),
 		VitePWA({
+			strategies: 'injectManifest',
+			srcDir: 'src',
+			filename: 'sw.ts',
 			registerType: 'autoUpdate',
-			workbox: {
-				clientsClaim: true,
-				skipWaiting: true,
-				runtimeCaching: [
+			manifest: {
+				short_name: 'Shopper',
+				name: 'Shopper',
+				icons: [
 					{
-						urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
-						handler: 'CacheFirst',
-						options: {
-							cacheName: 'assets-cache',
-							expiration: {
-								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 * 365,
-							},
-							cacheableResponse: {
-								statuses: [0, 200],
-							},
-						},
+						src: '/favicon.ico',
+						type: 'image/png',
 					},
 				],
+				display: 'standalone',
+				theme_color: '#000000',
+				background_color: '#ffffff',
 			},
 			devOptions: {
 				enabled: true,
+				type: 'module',
 			},
 		}),
 	],

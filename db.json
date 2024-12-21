@@ -1,0 +1,25 @@
+{
+	"products": [
+		{
+			"id": "1",
+			"title": "Ford Mustang",
+			"description": "A super musuline horse!",
+			"imgUrl": "https://www.ford.ca/content/dam/vdm_ford/live/en_ca/ford/nameplate/mustang/2025/collections/_360/race-red/S650_MY25_300A_ext_Race_Red_01.jpeg",
+			"price": 45000
+		},
+		{
+			"id": "2",
+			"title": "Chevrolet Corvette",
+			"description": "The stinger!",
+			"imgUrl": "https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2025/performance/corvette-z06/mov/01-images/2025-z06-masthead-01.png?imwidth=3000",
+			"views": 55000
+		},
+		{
+			"id": "3",
+			"title": "Dodge Viper",
+			"description": "A dangerous snake!",
+			"imgUrl": "https://www.dodge.com/content/dam/fca-brands/na/dodge/en_us/seo/viper/desktop/hero/dodge-viper-sundown-hero-desktop.jpg",
+			"views": 65000
+		}
+	]
+}
